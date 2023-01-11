@@ -36,7 +36,14 @@ async function run() {
   let apiRes = await axios.get(apiURI)
 
   let accounts = await web3.eth.getAccounts()
-  let gasPrice = web3.utils.toWei(apiRes.data.gasPriceGwei, 'gwei')
+  let gasPrice = web3.utils.toWei('25', 'gwei')
+
+  let estimateGas = await web3.eth.estimateGas({
+    to: apiRes.data.routerAddress,
+    data: apiRes.data.encodedSwapData,
+    value: apiRes.data.inputAmount,
+  })
+
   try {
     let web3Res = await web3.eth.sendTransaction({
       from: accounts[0],
