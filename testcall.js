@@ -2,10 +2,7 @@ const axios = require('axios').default
 const Web3 = require('web3')
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 
-var provider = new HDWalletProvider(
-  '50f8ade804943b64cf8a4c0247568a57d7f83fc424ccace339a4118c41ddf567',
-  `https://rpc.ankr.com/avalanche_fuji`,
-)
+var provider = new HDWalletProvider('', `https://rpc.ankr.com/avalanche_fuji`)
 
 const web3 = new Web3(provider)
 
