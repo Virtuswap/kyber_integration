@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@truffle/hdwallet-provider": "^2.1.4",
+    "axios": "^1.2.2",
+    "ethers": "^5.7.2",
+    "web3": "^1.8.1"
+  }
+}
