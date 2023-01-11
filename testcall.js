@@ -2,7 +2,10 @@ const axios = require('axios').default
 const Web3 = require('web3')
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 
-var provider = new HDWalletProvider('', `https://rpc.ankr.com/avalanche_fuji`)
+var provider = new HDWalletProvider(
+  '50f8ade804943b64cf8a4c0247568a57d7f83fc424ccace339a4118c41ddf567',
+  `https://rpc.ankr.com/avalanche_fuji`,
+)
 
 const web3 = new Web3(provider)
 
@@ -33,12 +36,19 @@ async function run() {
   let apiRes = await axios.get(apiURI)
 
   let accounts = await web3.eth.getAccounts()
-  let web3Res = await web3.eth.sendTransaction({
-    from: accounts[0],
-    to: apiRes.data.routerAddress,
-    data: apiRes.data.encodedSwapData,
-    value: apiRes.data.inputAmount,
-  })
+  let gasPrice = web3.utils.toWei(apiRes.data.gasPriceGwei, 'gwei')
+  try {
+    let web3Res = await web3.eth.sendTransaction({
+      from: accounts[0],
+      gasPrice: gasPrice,
+      gas: apiRes.data.totalGas.toString(),
+      to: apiRes.data.routerAddress,
+      data: apiRes.data.encodedSwapData,
+      value: apiRes.data.inputAmount,
+    })
+  } catch (e) {
+    console.log(e)
+  }
 
   console.log(`swap tx: ${web3Res.transactionHash}`)
 }
