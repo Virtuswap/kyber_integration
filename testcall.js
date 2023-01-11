@@ -23,7 +23,7 @@ async function run() {
   let apiURI = formatAPICall(
     '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
     '0xbde248b108065a08c60c88d9ed09aec5a8d9a2b1',
-    '50000000000000',
+    web3.utils.toWei('0.5', 'ether'),
     '0x17ae363f142517b593d9a71282bab8ca6bb4ea51',
     '2000',
     'false',
