@@ -57,4 +57,6 @@ async function run() {
   console.log(`swap tx: ${web3Res.transactionHash}`)
 }
 
-run().then(() => {})
+;(async () => {
+  await run()
+})()
